@@ -69,7 +69,7 @@ public class Book implements BaseEntity{
 		return authors;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	private BookStatus status;
 
 	public void setAuthors(Set<BookAuthor> authors) {

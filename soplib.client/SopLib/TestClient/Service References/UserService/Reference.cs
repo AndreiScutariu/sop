@@ -15,19 +15,39 @@ namespace TestClient.UserService {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://services.lib.sop/", ConfigurationName="UserService.UserService")]
     public interface UserService {
         
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/addRequest", ReplyAction="http://services.lib.sop/UserService/addResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         TestClient.UserService.addResponse add(TestClient.UserService.addRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/addRequest", ReplyAction="http://services.lib.sop/UserService/addResponse")]
         System.Threading.Tasks.Task<TestClient.UserService.addResponse> addAsync(TestClient.UserService.addRequest request);
         
+        // CODEGEN: Parameter 'return' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/getRequest", ReplyAction="http://services.lib.sop/UserService/getResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="return")]
         TestClient.UserService.getResponse get(TestClient.UserService.getRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/getRequest", ReplyAction="http://services.lib.sop/UserService/getResponse")]
         System.Threading.Tasks.Task<TestClient.UserService.getResponse> getAsync(TestClient.UserService.getRequest request);
+        
+        // CODEGEN: Parameter 'arg0' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/updateRequest", ReplyAction="http://services.lib.sop/UserService/updateResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        TestClient.UserService.updateResponse update(TestClient.UserService.updateRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/updateRequest", ReplyAction="http://services.lib.sop/UserService/updateResponse")]
+        System.Threading.Tasks.Task<TestClient.UserService.updateResponse> updateAsync(TestClient.UserService.updateRequest request);
+        
+        // CODEGEN: Parameter 'arg0' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/deleteRequest", ReplyAction="http://services.lib.sop/UserService/deleteResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        TestClient.UserService.deleteResponse delete(TestClient.UserService.deleteRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://services.lib.sop/UserService/deleteRequest", ReplyAction="http://services.lib.sop/UserService/deleteResponse")]
+        System.Threading.Tasks.Task<TestClient.UserService.deleteResponse> deleteAsync(TestClient.UserService.deleteRequest request);
     }
     
     /// <remarks/>
@@ -166,6 +186,7 @@ namespace TestClient.UserService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="add", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
     public partial class addRequest {
         
@@ -183,6 +204,7 @@ namespace TestClient.UserService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="addResponse", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
     public partial class addResponse {
         
@@ -200,6 +222,7 @@ namespace TestClient.UserService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="get", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
     public partial class getRequest {
         
@@ -217,6 +240,7 @@ namespace TestClient.UserService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="getResponse", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
     public partial class getResponse {
         
@@ -229,6 +253,67 @@ namespace TestClient.UserService {
         
         public getResponse(TestClient.UserService.userDto @return) {
             this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="update", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
+    public partial class updateRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.lib.sop/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long arg0;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.lib.sop/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public TestClient.UserService.userDto arg1;
+        
+        public updateRequest() {
+        }
+        
+        public updateRequest(long arg0, TestClient.UserService.userDto arg1) {
+            this.arg0 = arg0;
+            this.arg1 = arg1;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="updateResponse", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
+    public partial class updateResponse {
+        
+        public updateResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="delete", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
+    public partial class deleteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://services.lib.sop/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long arg0;
+        
+        public deleteRequest() {
+        }
+        
+        public deleteRequest(long arg0) {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="deleteResponse", WrapperNamespace="http://services.lib.sop/", IsWrapped=true)]
+    public partial class deleteResponse {
+        
+        public deleteResponse() {
         }
     }
     
@@ -259,20 +344,96 @@ namespace TestClient.UserService {
                 base(binding, remoteAddress) {
         }
         
-        public TestClient.UserService.addResponse add(TestClient.UserService.addRequest request) {
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestClient.UserService.addResponse TestClient.UserService.UserService.add(TestClient.UserService.addRequest request) {
             return base.Channel.add(request);
         }
         
-        public System.Threading.Tasks.Task<TestClient.UserService.addResponse> addAsync(TestClient.UserService.addRequest request) {
+        public long add(TestClient.UserService.userDto arg0) {
+            TestClient.UserService.addRequest inValue = new TestClient.UserService.addRequest();
+            inValue.arg0 = arg0;
+            TestClient.UserService.addResponse retVal = ((TestClient.UserService.UserService)(this)).add(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<TestClient.UserService.addResponse> TestClient.UserService.UserService.addAsync(TestClient.UserService.addRequest request) {
             return base.Channel.addAsync(request);
         }
         
-        public TestClient.UserService.getResponse get(TestClient.UserService.getRequest request) {
+        public System.Threading.Tasks.Task<TestClient.UserService.addResponse> addAsync(TestClient.UserService.userDto arg0) {
+            TestClient.UserService.addRequest inValue = new TestClient.UserService.addRequest();
+            inValue.arg0 = arg0;
+            return ((TestClient.UserService.UserService)(this)).addAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestClient.UserService.getResponse TestClient.UserService.UserService.get(TestClient.UserService.getRequest request) {
             return base.Channel.get(request);
         }
         
-        public System.Threading.Tasks.Task<TestClient.UserService.getResponse> getAsync(TestClient.UserService.getRequest request) {
+        public TestClient.UserService.userDto get(long arg0) {
+            TestClient.UserService.getRequest inValue = new TestClient.UserService.getRequest();
+            inValue.arg0 = arg0;
+            TestClient.UserService.getResponse retVal = ((TestClient.UserService.UserService)(this)).get(inValue);
+            return retVal.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<TestClient.UserService.getResponse> TestClient.UserService.UserService.getAsync(TestClient.UserService.getRequest request) {
             return base.Channel.getAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<TestClient.UserService.getResponse> getAsync(long arg0) {
+            TestClient.UserService.getRequest inValue = new TestClient.UserService.getRequest();
+            inValue.arg0 = arg0;
+            return ((TestClient.UserService.UserService)(this)).getAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestClient.UserService.updateResponse TestClient.UserService.UserService.update(TestClient.UserService.updateRequest request) {
+            return base.Channel.update(request);
+        }
+        
+        public void update(long arg0, TestClient.UserService.userDto arg1) {
+            TestClient.UserService.updateRequest inValue = new TestClient.UserService.updateRequest();
+            inValue.arg0 = arg0;
+            inValue.arg1 = arg1;
+            TestClient.UserService.updateResponse retVal = ((TestClient.UserService.UserService)(this)).update(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<TestClient.UserService.updateResponse> TestClient.UserService.UserService.updateAsync(TestClient.UserService.updateRequest request) {
+            return base.Channel.updateAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<TestClient.UserService.updateResponse> updateAsync(long arg0, TestClient.UserService.userDto arg1) {
+            TestClient.UserService.updateRequest inValue = new TestClient.UserService.updateRequest();
+            inValue.arg0 = arg0;
+            inValue.arg1 = arg1;
+            return ((TestClient.UserService.UserService)(this)).updateAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestClient.UserService.deleteResponse TestClient.UserService.UserService.delete(TestClient.UserService.deleteRequest request) {
+            return base.Channel.delete(request);
+        }
+        
+        public void delete(long arg0) {
+            TestClient.UserService.deleteRequest inValue = new TestClient.UserService.deleteRequest();
+            inValue.arg0 = arg0;
+            TestClient.UserService.deleteResponse retVal = ((TestClient.UserService.UserService)(this)).delete(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<TestClient.UserService.deleteResponse> TestClient.UserService.UserService.deleteAsync(TestClient.UserService.deleteRequest request) {
+            return base.Channel.deleteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<TestClient.UserService.deleteResponse> deleteAsync(long arg0) {
+            TestClient.UserService.deleteRequest inValue = new TestClient.UserService.deleteRequest();
+            inValue.arg0 = arg0;
+            return ((TestClient.UserService.UserService)(this)).deleteAsync(inValue);
         }
     }
 }

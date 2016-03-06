@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using TestClient.UserService;
 
 namespace TestClient
 {
@@ -7,21 +7,28 @@ namespace TestClient
     {
         static void Main()
         {
-            //var roleService = new RolesServiceClient();
-            //var roles = roleService.getList();
 
-            //var userService = new UserServiceClient();
+            var userService = new UserServiceClient();
 
-            //var user = new userDto {name = "Andrei Scutariu", roles = new roleDto[2]};
-            //user.roles[0] = roles.FirstOrDefault(x => x.name == "Editor");
-            //user.roles[1] = roles.FirstOrDefault(x => x.name == "Manager");
+            var user = new userDto { name = "Andrei Scutariu", roles = new roleDto[0] };
+            
+            var savedUserId = userService.add(user);
+            Console.WriteLine("User added with id: " + savedUserId);
 
-            //var userId = userService.add(user);
+            var userToUpdate = userService.get(savedUserId);
+            Console.WriteLine("Saved user: " + userToUpdate.name);
+            userToUpdate.name = userToUpdate.name + " Modified";
+            userService.update(savedUserId, userToUpdate);
 
-            //Console.WriteLine("User added with id: " + userId);
+            var updatedUser = userService.get(savedUserId);
+            Console.WriteLine("Updated user: " + updatedUser.name);
 
-            //var savedUser = userService.get(userId);
-            //Console.WriteLine("Saved user: " + savedUser.name);
+            userService.delete(savedUserId);
+            var deletedUser = userService.get(savedUserId);
+            if (deletedUser == null)
+            {
+                Console.WriteLine("User with id {0} was deleted.", savedUserId);
+            }
         }
     }
 }

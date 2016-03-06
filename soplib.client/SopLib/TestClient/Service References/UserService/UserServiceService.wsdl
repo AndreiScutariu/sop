@@ -17,6 +17,18 @@
   <message name="getResponse">
     <part name="parameters" element="tns:getResponse" />
   </message>
+  <message name="update">
+    <part name="parameters" element="tns:update" />
+  </message>
+  <message name="updateResponse">
+    <part name="parameters" element="tns:updateResponse" />
+  </message>
+  <message name="delete">
+    <part name="parameters" element="tns:delete" />
+  </message>
+  <message name="deleteResponse">
+    <part name="parameters" element="tns:deleteResponse" />
+  </message>
   <portType name="UserService">
     <operation name="add">
       <input wsam:Action="http://services.lib.sop/UserService/addRequest" message="tns:add" />
@@ -25,6 +37,14 @@
     <operation name="get">
       <input wsam:Action="http://services.lib.sop/UserService/getRequest" message="tns:get" />
       <output wsam:Action="http://services.lib.sop/UserService/getResponse" message="tns:getResponse" />
+    </operation>
+    <operation name="update">
+      <input wsam:Action="http://services.lib.sop/UserService/updateRequest" message="tns:update" />
+      <output wsam:Action="http://services.lib.sop/UserService/updateResponse" message="tns:updateResponse" />
+    </operation>
+    <operation name="delete">
+      <input wsam:Action="http://services.lib.sop/UserService/deleteRequest" message="tns:delete" />
+      <output wsam:Action="http://services.lib.sop/UserService/deleteResponse" message="tns:deleteResponse" />
     </operation>
   </portType>
   <binding name="UserServicePortBinding" type="tns:UserService">
@@ -39,6 +59,24 @@
       </output>
     </operation>
     <operation name="get">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="update">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="delete">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />

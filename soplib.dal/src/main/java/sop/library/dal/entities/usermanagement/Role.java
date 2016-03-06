@@ -20,6 +20,8 @@ import sop.library.dal.entities.BaseEntity;
 @Table(name = "roles")
 public class Role implements BaseEntity {
 	
+	public Role() {}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;

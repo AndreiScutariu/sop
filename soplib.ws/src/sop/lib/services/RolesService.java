@@ -16,12 +16,14 @@ public class RolesService {
 
     public RolesService() {}
 
+    /*
     @WebMethod
     public RoleDto get(Long id) {
     	RoleDao roleDao = new RoleDaoImpl();
     	Role role = roleDao.find(id);
     	return RoleMapper.buildFromEntity(role);
     }
+    */
     
     @WebMethod
     public List<RoleDto> getList() {

@@ -26,6 +26,22 @@ public class UserService {
 	public UserDto get(Long id) {
 		UserDao userDao = new UserDaoImpl();
 		User user = userDao.find(id);
+		if(user == null)
+			return null;
 		return UserMapper.buildFromEntity(user);
+	}
+	
+	@WebMethod
+	public void update(Long id, UserDto userDto) {
+		UserDao userDao = new UserDaoImpl();
+		User user = UserMapper.mapUser(id, userDto);
+		userDao.saveOrUpdate(user);
+	}
+	
+	@WebMethod
+	public void delete(Long id) {
+		UserDao userDao = new UserDaoImpl();
+		User user = userDao.find(id);
+		userDao.delete(user);
 	}
 }
