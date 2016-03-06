@@ -15,9 +15,7 @@ import sop.library.dal.entities.library.BookStatus;
 import sop.library.dal.entities.library.ChangeType;
 import sop.library.dal.entities.usermanagement.Right;
 import sop.library.dal.entities.usermanagement.Role;
-import sop.library.dal.entities.usermanagement.RoleRight;
 import sop.library.dal.entities.usermanagement.User;
-import sop.library.dal.entities.usermanagement.UserRole;
 import sop.library.exceptions.DataAccessLayerException;
 
 public class HibernateFactory {
@@ -84,15 +82,12 @@ public class HibernateFactory {
 	private static SessionFactory configureSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         
-        //TODO, relative path after running on server
-        File f = new File("d:\\Projects\\sop-library\\source\\soplib.dal\\src\\resources\\hibernate.cfg.xml"); 
+        File f = new File("D:\\Projects\\sop-library\\source\\soplib.dal\\src\\main\\java\\sop\\library\\dal\\utils\\hibernate.cfg.xml"); 
         configuration.configure(f);
         
         configuration.addAnnotatedClass(Role.class);
         configuration.addAnnotatedClass(Right.class);
-        configuration.addAnnotatedClass(RoleRight.class);
         configuration.addAnnotatedClass(User.class);
-        configuration.addAnnotatedClass(UserRole.class);
         
         configuration.addAnnotatedClass(Book.class);
         configuration.addAnnotatedClass(BookAuthor.class);

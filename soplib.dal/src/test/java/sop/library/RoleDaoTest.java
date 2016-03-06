@@ -29,6 +29,8 @@ public class RoleDaoTest extends TestCase
     	roleDao.saveOrUpdate(role);
     	
         assertTrue( role.getId() > 0 );
+        
+        roleDao.delete(role);
     }
     
     public void testDelete()

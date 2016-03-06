@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://services.lib.sop/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="UserServiceService" targetNamespace="http://services.lib.sop/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://desktop-9t9ev70:8080/soplib.ws/UserServiceService?xsd=1" namespace="http://services.lib.sop/" />
+    </xsd:schema>
+  </types>
+  <message name="add">
+    <part name="parameters" element="tns:add" />
+  </message>
+  <message name="addResponse">
+    <part name="parameters" element="tns:addResponse" />
+  </message>
+  <message name="get">
+    <part name="parameters" element="tns:get" />
+  </message>
+  <message name="getResponse">
+    <part name="parameters" element="tns:getResponse" />
+  </message>
+  <portType name="UserService">
+    <operation name="add">
+      <input wsam:Action="http://services.lib.sop/UserService/addRequest" message="tns:add" />
+      <output wsam:Action="http://services.lib.sop/UserService/addResponse" message="tns:addResponse" />
+    </operation>
+    <operation name="get">
+      <input wsam:Action="http://services.lib.sop/UserService/getRequest" message="tns:get" />
+      <output wsam:Action="http://services.lib.sop/UserService/getResponse" message="tns:getResponse" />
+    </operation>
+  </portType>
+  <binding name="UserServicePortBinding" type="tns:UserService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="add">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="get">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="UserServiceService">
+    <port name="UserServicePort" binding="tns:UserServicePortBinding">
+      <soap:address location="http://desktop-9t9ev70:8080/soplib.ws/UserServiceService" />
+    </port>
+  </service>
+</definitions>
