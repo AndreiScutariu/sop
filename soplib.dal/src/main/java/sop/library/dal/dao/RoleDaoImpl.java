@@ -2,10 +2,10 @@ package sop.library.dal.dao;
 
 import sop.library.dal.entities.usermanagement.*;
 
-public class RoleDaoImpl extends BaseDaoImpl<Role> implements RoleDao {
+public class RoleDaoImpl extends BaseDaoImpl<RoleEntity> implements RoleDao {
 
 	public RoleDaoImpl() {
-		super(Role.class);
+		super(RoleEntity.class);
     }
 	
 }

@@ -2,7 +2,7 @@ package sop.library;
 
 import sop.library.dal.dao.RoleDao;
 import sop.library.dal.dao.RoleDaoImpl;
-import sop.library.dal.entities.usermanagement.Role;
+import sop.library.dal.entities.usermanagement.RoleEntity;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -23,7 +23,7 @@ public class RoleDaoTest extends TestCase
     
     public void testInsert()
     {
-    	Role role = new Role();
+    	RoleEntity role = new RoleEntity();
     	role.setName("Manager");
     	
     	roleDao.saveOrUpdate(role);
@@ -35,14 +35,14 @@ public class RoleDaoTest extends TestCase
     
     public void testDelete()
     {
-    	Role role = new Role();
+    	RoleEntity role = new RoleEntity();
     	role.setName("Manager");
     	
     	Long id = roleDao.saveOrUpdate(role);
 
     	roleDao.delete(role);
         
-        Role newRole = roleDao.find(id);
+        RoleEntity newRole = roleDao.find(id);
 		assertTrue( newRole == null );
     }
 }

@@ -1,7 +1,7 @@
 package sop.library.dal.dao;
 
-import sop.library.dal.entities.usermanagement.Role;
+import sop.library.dal.entities.usermanagement.RoleEntity;
 
-public interface RoleDao extends BaseDao<Role>  {
+public interface RoleDao extends BaseDao<RoleEntity>  {
 
 }

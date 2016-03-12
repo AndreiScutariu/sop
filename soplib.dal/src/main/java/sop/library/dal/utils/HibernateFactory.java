@@ -8,14 +8,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import sop.library.dal.entities.library.Book;
-import sop.library.dal.entities.library.BookAuthor;
-import sop.library.dal.entities.library.BookChange;
-import sop.library.dal.entities.library.BookStatus;
-import sop.library.dal.entities.library.ChangeType;
-import sop.library.dal.entities.usermanagement.Right;
-import sop.library.dal.entities.usermanagement.Role;
-import sop.library.dal.entities.usermanagement.User;
+import sop.library.dal.entities.library.BookAuthorEntity;
+import sop.library.dal.entities.library.BookChangeEntity;
+import sop.library.dal.entities.library.BookEntity;
+import sop.library.dal.entities.library.BookStatusEntity;
+import sop.library.dal.entities.library.ChangeTypeEntity;
+import sop.library.dal.entities.usermanagement.RoleEntity;
+import sop.library.dal.entities.usermanagement.UserEntity;
 import sop.library.exceptions.DataAccessLayerException;
 
 public class HibernateFactory {
@@ -85,15 +84,14 @@ public class HibernateFactory {
         File f = new File("D:\\Projects\\sop-library\\source\\soplib.dal\\src\\main\\java\\sop\\library\\dal\\utils\\hibernate.cfg.xml"); 
         configuration.configure(f);
         
-        configuration.addAnnotatedClass(Role.class);
-        configuration.addAnnotatedClass(Right.class);
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(RoleEntity.class);
+        configuration.addAnnotatedClass(UserEntity.class);
         
-        configuration.addAnnotatedClass(Book.class);
-        configuration.addAnnotatedClass(BookAuthor.class);
-        configuration.addAnnotatedClass(BookChange.class);
-        configuration.addAnnotatedClass(BookStatus.class);
-        configuration.addAnnotatedClass(ChangeType.class);
+        configuration.addAnnotatedClass(BookEntity.class);
+        configuration.addAnnotatedClass(BookAuthorEntity.class);
+        configuration.addAnnotatedClass(BookChangeEntity.class);
+        configuration.addAnnotatedClass(BookStatusEntity.class);
+        configuration.addAnnotatedClass(ChangeTypeEntity.class);
         
         sessionFactory = configuration.buildSessionFactory();
         return sessionFactory;
