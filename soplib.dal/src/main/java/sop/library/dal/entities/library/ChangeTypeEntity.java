@@ -1,5 +1,7 @@
 package sop.library.dal.entities.library;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,14 @@ public class ChangeTypeEntity implements BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	
+	private String name;
+
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date createdDate;
+
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date lastModifiedDate;
 
 	public Long getId() {
 		return id;
@@ -24,14 +34,28 @@ public class ChangeTypeEntity implements BaseEntity {
 		this.id = id;
 	}
 	
-	private String name;
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date date) {
+		createdDate = date;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date date) {
+		lastModifiedDate = date;
 	}
 }
 

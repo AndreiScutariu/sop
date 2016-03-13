@@ -1,5 +1,6 @@
 package sop.library.dal.entities.usermanagement;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,12 @@ public class UserEntity implements BaseEntity {
 	private String name;
 	
 	private String description;
+	
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date createdDate;
+	
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date lastModifiedDate;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_roles", 
@@ -82,5 +89,21 @@ public class UserEntity implements BaseEntity {
 			this.roles = new HashSet<RoleEntity>(0);
 		}
 		this.roles.add(role);
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date date) {
+		createdDate = date;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date date) {
+		lastModifiedDate = date;
 	}
 }

@@ -9,7 +9,7 @@ import sop.library.dal.entities.usermanagement.RoleEntity;
 import sop.library.model.Role;
 import sop.library.model.mapper.RoleMapper;
 
-public class RoleModelBuilderImpl implements GetModelBuilder<Role> {
+public class RoleModelBuilderImpl implements BaseModelBuilder<Role> {
 	
 	public List<Role> get(){
 		List<Role> roles = new ArrayList<Role>();
@@ -23,6 +23,21 @@ public class RoleModelBuilderImpl implements GetModelBuilder<Role> {
 	public Role get(Long id) {
 		RoleDao roleDao = new RoleDaoImpl();
 		RoleEntity role = roleDao.find(id);
+		if(role == null)
+			return null;
 		return RoleMapper.buildFromEntity(role);
 	}
+
+	public Long save(Role userDto) {
+		return null;
+	}
+
+	public void update(Long id, Role userDto) {
+		
+	}
+
+	public void delete(Long id) {
+		
+	}
+
 }

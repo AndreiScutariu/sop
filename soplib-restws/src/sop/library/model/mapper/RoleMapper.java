@@ -8,7 +8,7 @@ import sop.library.dal.entities.usermanagement.RoleEntity;
 
 public class RoleMapper {
 	public static Role buildFromEntity(RoleEntity role) {
-		return new Role(role.getId(), role.getName());
+		return new Role(role.getId(), role.getCreatedDate(), role.getLastModifiedDate(), role.getName());
 	}
 	
 	public static List<Role> buildFromEntities(List<RoleEntity> roles) {

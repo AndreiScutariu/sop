@@ -1,5 +1,7 @@
 package sop.library.dal.entities.library;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,15 @@ public class BookAuthorEntity implements BaseEntity  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date createdDate;
+
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date lastModifiedDate;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	private UserEntity autor;
+	
 	public Long getId() {
 		return id;
 	}
@@ -26,9 +37,6 @@ public class BookAuthorEntity implements BaseEntity  {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@OneToOne(fetch = FetchType.EAGER)
-	private UserEntity autor;
 	
 	public UserEntity getAutor() {
 		return autor;
@@ -47,5 +55,21 @@ public class BookAuthorEntity implements BaseEntity  {
 
 	public void setBook(BookEntity book) {
 		this.book = book;
+	}
+	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date date) {
+		createdDate = date;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date date) {
+		lastModifiedDate = date;
 	}
 }

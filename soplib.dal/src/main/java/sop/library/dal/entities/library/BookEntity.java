@@ -1,5 +1,6 @@
 package sop.library.dal.entities.library;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,16 +24,25 @@ public class BookEntity implements BaseEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	private String name;
+	
+	private String description;
 
+	@OneToOne(fetch = FetchType.EAGER)
+	private BookStatusEntity status;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	private UserEntity editor;
+	
+	@OneToMany(mappedBy="book")
+	private Set<BookAuthorEntity> authors = new HashSet<BookAuthorEntity>(0);
+	
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date createdDate;
+
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date lastModifiedDate;
+	
 	public String getName() {
 		return name;
 	}
@@ -41,8 +51,6 @@ public class BookEntity implements BaseEntity{
 		this.name = name;
 	}
 	
-	private String description;
-	
 	public String getDescription() {
 		return description;
 	}
@@ -50,9 +58,6 @@ public class BookEntity implements BaseEntity{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	@OneToOne(fetch = FetchType.EAGER)
-	private UserEntity editor;
 	
 	public UserEntity getEditor() {
 		return editor;
@@ -61,17 +66,20 @@ public class BookEntity implements BaseEntity{
 	public void setEditor(UserEntity editor) {
 		this.editor = editor;
 	}
-
-	@OneToMany(mappedBy="book")
-	private Set<BookAuthorEntity> authors = new HashSet<BookAuthorEntity>(0);
 	
 	public Set<BookAuthorEntity> getAuthors() {
 		return authors;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
-	private BookStatusEntity status;
+	
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public void setAuthors(Set<BookAuthorEntity> authors) {
 		this.authors = authors;
 	}
@@ -82,5 +90,21 @@ public class BookEntity implements BaseEntity{
 
 	public void setStatus(BookStatusEntity status) {
 		this.status = status;
+	}
+	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date date) {
+		createdDate = date;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date date) {
+		lastModifiedDate = date;
 	}
 }

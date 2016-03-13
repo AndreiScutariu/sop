@@ -13,6 +13,7 @@ import sop.library.dal.dao.UserDao;
 import sop.library.dal.dao.UserDaoImpl;
 import sop.library.dal.entities.usermanagement.RoleEntity;
 import sop.library.dal.entities.usermanagement.UserEntity;
+import sop.library.exceptions.ResourceNotFoundException;
 
 public class UserMapper {
 
@@ -30,9 +31,12 @@ public class UserMapper {
 		return user;
 	}
 	
-	public static UserEntity mapUser(Long id, User userDto) {
+	public static UserEntity mapUser(Long id, User userDto) throws ResourceNotFoundException {
 		UserDao userDao = new UserDaoImpl();
 		UserEntity user = userDao.find(id);
+		if(user == null) {
+			throw new ResourceNotFoundException();
+		}
 		user.setName(userDto.getName());
 		user.setDescription(userDto.getDescription());
 
@@ -40,7 +44,7 @@ public class UserMapper {
 	}
 	
 	public static User buildFromEntity(UserEntity user) {
-		User userDto = new User(user.getId(), user.getName(), user.getDescription(), null);
+		User userDto = new User(user.getId(), user.getCreatedDate(), user.getLastModifiedDate(), user.getName(), user.getDescription(), null);
 		userDto.setRoles(new ArrayList<Role>(0));
 		return userDto;
 	}

@@ -1,5 +1,7 @@
 package sop.library.dal.entities.library;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 import sop.library.dal.entities.BaseEntity;
 
@@ -18,6 +21,18 @@ public class BookChangeEntity implements BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
+	@OneToOne(fetch = FetchType.EAGER)
+	private ChangeTypeEntity changeType;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	private BookEntity oldBook;
+	
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date createdDate;
+
+	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private Date lastModifiedDate;
+	
 	public Long getId() {
 		return id;
 	}
@@ -25,10 +40,7 @@ public class BookChangeEntity implements BaseEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	@OneToOne(fetch = FetchType.EAGER)
-	private ChangeTypeEntity changeType;
-
+	
 	public ChangeTypeEntity getChangeType() {
 		return changeType;
 	}
@@ -36,9 +48,6 @@ public class BookChangeEntity implements BaseEntity {
 	public void setChangeType(ChangeTypeEntity changeType) {
 		this.changeType = changeType;
 	}
-	
-	@OneToOne(fetch = FetchType.EAGER)
-	private BookEntity oldBook;
 	
 	public BookEntity getOldBook() {
 		return oldBook;
@@ -57,5 +66,21 @@ public class BookChangeEntity implements BaseEntity {
 
 	public void setNewBook(BookEntity newBook) {
 		this.newBook = newBook;
+	}
+	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date date) {
+		createdDate = date;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date date) {
+		lastModifiedDate = date;
 	}
 }

@@ -7,23 +7,33 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
-import sop.library.model.builder.GetModelBuilder;
+import sop.library.exceptions.ResourceNotFoundException;
+import sop.library.model.builder.BaseModelBuilder;
 
 public abstract class GetApi<T> {
-	protected GetModelBuilder<T> modelBuilder;
+	protected BaseModelBuilder<T> modelBuilder;
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public List<T> getAll() {
-		return modelBuilder.get();
+		List<T> list = modelBuilder.get();
+		return list;
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Path("{id}")
-	public T get(@PathParam ("id") String id) {
+	public Response get(@PathParam ("id") String id) {
 		Long idL = Long.decode(id);
-		return modelBuilder.get(idL);
+		T obj;
+		try {
+			obj = modelBuilder.get(idL);
+		} catch (ResourceNotFoundException e) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		return Response.status(Status.FOUND).entity(obj).build();
 	}
 }

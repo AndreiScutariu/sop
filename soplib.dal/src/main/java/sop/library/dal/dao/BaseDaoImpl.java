@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.Query;
 
+import java.util.Date;
 import java.util.List;
 
 import sop.library.dal.entities.BaseEntity;
@@ -26,6 +27,10 @@ public abstract class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
     public Long saveOrUpdate(T obj) {
         try {
             startOperation();
+            if(obj.getId() == null) {
+            	obj.setCreatedDate(new Date());
+            }
+            obj.setLastModifiedDate(new Date());
             session.saveOrUpdate(obj);
             tx.commit();
         } catch (HibernateException e) {
