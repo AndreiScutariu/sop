@@ -17,6 +17,8 @@ public class Role extends BaseModel implements Serializable {
 
 	public Role(Long id, Date created, Date modified, String name) {
 		super(id, created, modified);
+		resourceRoot = "roles";
+		buildLinks();
 		this.name = name;
 	}
 

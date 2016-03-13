@@ -1,21 +1,27 @@
 package sop.library.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class BaseModel implements Serializable {
+public abstract class BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	protected String resourceRoot;
+		
+	protected Long id;
 
 	private Date createdDate;
 
 	private Date lastModifiedDate;
 
+	protected List<Link> links;
+	
 	public BaseModel() {}
 	
 	public BaseModel(Long id, Date created, Date modified) {
@@ -46,5 +52,19 @@ public class BaseModel implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
+	}
+	
+	public void buildLinks() {
+		links = new ArrayList<Link>();
+		Link link = new Link("self", "/soplib-restws/api/" + resourceRoot + "/" + id);
+		links.add(link);
 	}
 }

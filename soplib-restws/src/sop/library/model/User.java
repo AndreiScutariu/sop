@@ -1,7 +1,6 @@
 package sop.library.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,16 +15,15 @@ public class User extends BaseModel implements Serializable {
 
 	private String description;
 
-	private List<Role> roles = new ArrayList<Role>(0);
-
 	public User() {
 	}
 
 	public User(Long id, Date created, Date modified, String name, String description, List<Role> roles) {
 		super(id, created, modified);
+		resourceRoot = "users";
+		buildLinks();
 		this.name = name;
 		this.description = description;
-		this.roles = roles;
 	}
 	
 	public String getName() {
@@ -43,12 +41,10 @@ public class User extends BaseModel implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	
+	public void buildLinks() {
+		super.buildLinks();
+		Link link = new Link("roles", "/soplib-restws/api/" + resourceRoot + "/" + id + "/roles");
+		links.add(link);
 	}
 }

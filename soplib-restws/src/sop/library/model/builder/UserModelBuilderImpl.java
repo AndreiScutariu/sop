@@ -7,7 +7,9 @@ import sop.library.dal.dao.UserDao;
 import sop.library.dal.dao.UserDaoImpl;
 import sop.library.dal.entities.usermanagement.UserEntity;
 import sop.library.exceptions.ResourceNotFoundException;
+import sop.library.model.Role;
 import sop.library.model.User;
+import sop.library.model.mapper.RoleMapper;
 import sop.library.model.mapper.UserMapper;
 
 public class UserModelBuilderImpl implements UserModelBuilder {
@@ -50,5 +52,14 @@ public class UserModelBuilderImpl implements UserModelBuilder {
 		if(user == null)
 			throw new ResourceNotFoundException();
 		userDao.delete(user);
+	}
+
+	public List<Role> getUserRoles(Long idL) throws ResourceNotFoundException {
+		UserDao userDao = new UserDaoImpl();
+		UserEntity user = userDao.find(idL);
+		if(user == null)
+			throw new ResourceNotFoundException();
+		List<Role> roles = RoleMapper.buildFromEntities(user.getRoles());
+		return roles;
 	}
 }
