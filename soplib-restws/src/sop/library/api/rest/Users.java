@@ -87,5 +87,4 @@ public class Users extends GetApi<User>{
 		}
 		return Response.ok().entity(roles).build();
 	}
-	
 }

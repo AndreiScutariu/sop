@@ -6,6 +6,7 @@ import java.util.List;
 import sop.library.dal.dao.RoleDao;
 import sop.library.dal.dao.RoleDaoImpl;
 import sop.library.dal.entities.usermanagement.RoleEntity;
+import sop.library.exceptions.ResourceNotFoundException;
 import sop.library.model.Role;
 import sop.library.model.mapper.RoleMapper;
 
@@ -20,11 +21,11 @@ public class RoleModelBuilderImpl implements BaseModelBuilder<Role> {
 		return roles;
 	}
 	
-	public Role get(Long id) {
+	public Role get(Long id) throws ResourceNotFoundException {
 		RoleDao roleDao = new RoleDaoImpl();
 		RoleEntity role = roleDao.find(id);
 		if(role == null)
-			return null;
+			throw new ResourceNotFoundException();
 		return RoleMapper.buildFromEntity(role);
 	}
 

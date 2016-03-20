@@ -1,0 +1,16 @@
+﻿.loading-spiner {
+    position: absolute;
+    width: 100px;
+    min-height: 100px;
+    text-align: center;
+    color: #fff;
+    background-image: url(../img/loader.gif);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -50px;
+}
