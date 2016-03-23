@@ -13,16 +13,19 @@ public class User extends BaseModel implements Serializable {
 
 	private String name;
 
+	private String email;
+	
 	private String description;
-
+	
 	public User() {
 	}
 
-	public User(Long id, Date created, Date modified, String name, String description, List<Role> roles) {
+	public User(Long id, Date created, Date modified, String name, String email, String description, List<Role> roles) {
 		super(id, created, modified);
 		resourceRoot = "users";
 		buildLinks();
 		this.name = name;
+		this.email = email;
 		this.description = description;
 	}
 	
@@ -47,4 +50,13 @@ public class User extends BaseModel implements Serializable {
 		Link link = new Link("roles", "/soplib-restws/api/" + resourceRoot + "/" + id + "/roles");
 		links.add(link);
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 }

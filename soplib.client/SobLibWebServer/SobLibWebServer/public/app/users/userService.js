@@ -1,9 +1,12 @@
 ﻿(function (module) {
-	
-	module.service('roleService', ["$http", "configurationService", function ($http, configurationService) {
-			this.getRoles = function (callback) {
-				$http.get(configurationService.rolesEndpoint).then(callback);
-			};
-		}]);
+    
+    module.service('userService', ["$http", "configurationService", function ($http, configurationService) {
+            this.getAll = function (callback) {
+                $http.get(configurationService.usersEndpoint).then(callback);
+            };
+            this.save = function (user, callback) {
+                $http.post(configurationService.usersEndpoint, user).then(callback);
+            };
+        }]);
 
 })(angular.module('app'));

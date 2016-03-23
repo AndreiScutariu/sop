@@ -31,7 +31,6 @@ public class Users extends GetApi<User>{
 	}
 	
 	@POST	
-	@Path("user")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response create(User user) {

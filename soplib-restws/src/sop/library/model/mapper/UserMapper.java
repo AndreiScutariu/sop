@@ -15,7 +15,7 @@ import sop.library.exceptions.ResourceNotFoundException;
 public class UserMapper {
 
 	public static UserEntity buildFromDto(User userDto) {
-		UserEntity user = new UserEntity(userDto.getId(), userDto.getName(), userDto.getDescription(), null);
+		UserEntity user = new UserEntity(userDto.getId(), userDto.getName(), userDto.getEmail(), userDto.getDescription(), null);
 		Set<RoleEntity> roles = user.getRoles();
 		if(roles == null) {
 			roles = new HashSet<RoleEntity>();
@@ -37,7 +37,7 @@ public class UserMapper {
 	}
 	
 	public static User buildFromEntity(UserEntity user) {
-		User userDto = new User(user.getId(), user.getCreatedDate(), user.getLastModifiedDate(), user.getName(), user.getDescription(), null);
+		User userDto = new User(user.getId(), user.getCreatedDate(), user.getLastModifiedDate(), user.getName(), user.getEmail(), user.getDescription(), null);
 		return userDto;
 	}
 }

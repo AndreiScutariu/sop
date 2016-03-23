@@ -10,10 +10,8 @@
 					
 					scope.$watch(scope.isLoading, function (v) {
 						if (v) {
-							console.log("show");
 							elm.show();
 						} else {
-							console.log("hide");
 							elm.hide();
 						}
 					});

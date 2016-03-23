@@ -1,7 +1,9 @@
-﻿(function (module) { 
+﻿ (function (module) { 
 	
 	module.service('configurationService', function () {
-		this.rolesEndpoint = 'http://localhost:8080/soplib-restws/api/roles';
+		this.baseEnpoint = 'http://localhost:8080/soplib-restws/api/';
+		this.rolesEndpoint = this.baseEnpoint + 'roles';
+		this.usersEndpoint = this.baseEnpoint + 'users';
 	});
 
 })(angular.module('app'));

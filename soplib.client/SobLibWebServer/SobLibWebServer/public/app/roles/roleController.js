@@ -6,7 +6,7 @@
 
 	module.controller("roleController", ["$scope", "roleService", function ($scope, roleService) {
 			$scope.bookTemp = "roles temp";
-			roleService.getRoles(rolesCbk);
+			roleService.getAll(rolesCbk);
 		}]);
 
 })(angular.module('app'));

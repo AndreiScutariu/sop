@@ -1,0 +1,34 @@
+﻿h2 Users
+div(id="grid1" ui-grid="{data: users}").grid
+br
+div(ng-controller="userDetailController")
+    button(type="button" class="btn"  ng-click="addNewUser()") Add new user
+    modal-dialog(show='modalShown' width='480px' height='80%')
+        form.form-horizontal   
+            fieldset
+                legend {{labels.frmTitle}}
+                    div.form-group
+                        br
+                        label(for="name").col-lg-3.control-label Full Name
+                        div.col-lg-8
+                            input.form-control(type="text" id="name" placeholder="Full Name" ng-model="user.name")
+                    div.form-group
+                        label(for="email").col-lg-3.control-label Email
+                        div.col-lg-8
+                            input.form-control(type="text" id="email" placeholder="Email" ng-model="user.email")
+                    div.form-group
+                        label(for="desc").col-lg-3.control-label Small Description
+                        div.col-lg-8
+                            input.form-control(type="text" id="desc" placeholder="Small Description" ng-model="user.description")
+                    div.form-group
+                        div.col-lg-3
+                        div.col-lg-9
+                            div(ng-repeat="role in roles")
+                                input.roundedTwo(type="checkbox" id="{{role.name}}")
+                                label.role-label(for="{{role.name}}") {{role.name}}
+                        
+                    div.form-group
+                        div.col-lg-9
+                        div.col-lg-3
+                            button.btn.btn-primary.btn-sm(ng-click="saveUser()") {{labels.btnName}}
+                

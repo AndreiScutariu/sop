@@ -31,10 +31,10 @@ public class UserEntity implements BaseEntity {
 	
 	private String description;
 	
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
+	private String email;
+	
 	private Date createdDate;
 	
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
 	private Date lastModifiedDate;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -44,10 +44,11 @@ public class UserEntity implements BaseEntity {
 	)
 	private Set<RoleEntity> roles = new HashSet<RoleEntity>(0);
 	
-	public UserEntity(Long id, String name, String description, Set<RoleEntity> roles) {
+	public UserEntity(Long id, String name, String email, String description, Set<RoleEntity> roles) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.email = email;
 		this.description = description;
 		this.roles = roles;
 	}
@@ -67,6 +68,14 @@ public class UserEntity implements BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	//TODO HERE
+	public void addNewRole(RoleEntity role) {
+		if(this.roles == null) {
+			this.roles = new HashSet<RoleEntity>(0);
+		}
+		this.roles.add(role);
+	}
 	
 	public Set<RoleEntity> getRoles() {
 		return roles;
@@ -84,13 +93,6 @@ public class UserEntity implements BaseEntity {
 		this.description = description;
 	}
 
-	public void addNewRole(RoleEntity role) {
-		if(this.roles == null) {
-			this.roles = new HashSet<RoleEntity>(0);
-		}
-		this.roles.add(role);
-	}
-
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -105,5 +107,13 @@ public class UserEntity implements BaseEntity {
 
 	public void setLastModifiedDate(Date date) {
 		lastModifiedDate = date;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
