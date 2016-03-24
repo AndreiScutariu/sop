@@ -79,3 +79,7 @@
 .role-label {
     margin-left: 1em;
 }
+
+.pointer {
+    cursor: pointer;
+}

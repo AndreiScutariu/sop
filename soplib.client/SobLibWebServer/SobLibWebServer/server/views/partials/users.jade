@@ -1,10 +1,27 @@
 ﻿h2 Users
-div(id="grid1" ui-grid="{data: users}").grid
+table.table.table-striped.table-hover
+    thead
+        tr
+            th.col-lg-3 Name
+            th.col-lg-3 Email
+            th.col-lg-3 Description
+            th.col-lg-1
+            th.col-lg-1
+    tbody
+        tr(ng-repeat="user in users")
+            td.col-lg-3 {{user.name}}
+            td.col-lg-3 {{user.email}}
+            td.col-lg-3 {{user.description}}
+            td.col-lg-1
+                a.pointer(ng-click="editUser(user)") Edit
+            td.col-lg-1
+                a.pointer(ng-click="deleteUser(user)") Delete
+
 br
 div(ng-controller="userDetailController")
-    button(type="button" class="btn"  ng-click="addNewUser()") Add new user
+    button(type="button" class="btn btn-sm"  ng-click="addNewUser()") Add new user
     modal-dialog(show='modalShown' width='480px' height='80%')
-        form.form-horizontal   
+        form.form-horizontal
             fieldset
                 legend {{labels.frmTitle}}
                     div.form-group
@@ -24,11 +41,10 @@ div(ng-controller="userDetailController")
                         div.col-lg-3
                         div.col-lg-9
                             div(ng-repeat="role in roles")
-                                input.roundedTwo(type="checkbox" id="{{role.name}}")
+                                input.roundedTwo(type="checkbox" id="{{role.name}}" ng-model="role.checked")
                                 label.role-label(for="{{role.name}}") {{role.name}}
-                        
+
                     div.form-group
                         div.col-lg-9
                         div.col-lg-3
                             button.btn.btn-primary.btn-sm(ng-click="saveUser()") {{labels.btnName}}
-                

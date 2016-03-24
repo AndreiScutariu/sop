@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -37,7 +36,7 @@ public class UserEntity implements BaseEntity {
 	
 	private Date lastModifiedDate;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", 
 		joinColumns = { @JoinColumn(name = "userId", nullable = false, updatable = false) }, 
 		inverseJoinColumns = { @JoinColumn(name = "roleId", nullable = false, updatable = false) }
@@ -67,14 +66,6 @@ public class UserEntity implements BaseEntity {
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	//TODO HERE
-	public void addNewRole(RoleEntity role) {
-		if(this.roles == null) {
-			this.roles = new HashSet<RoleEntity>(0);
-		}
-		this.roles.add(role);
 	}
 	
 	public Set<RoleEntity> getRoles() {

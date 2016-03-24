@@ -2,10 +2,12 @@ package sop.library.model.mapper;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import sop.library.model.*;
-
+import sop.library.dal.dao.RoleDao;
+import sop.library.dal.dao.RoleDaoImpl;
 import sop.library.dal.dao.UserDao;
 import sop.library.dal.dao.UserDaoImpl;
 import sop.library.dal.entities.usermanagement.RoleEntity;
@@ -16,9 +18,12 @@ public class UserMapper {
 
 	public static UserEntity buildFromDto(User userDto) {
 		UserEntity user = new UserEntity(userDto.getId(), userDto.getName(), userDto.getEmail(), userDto.getDescription(), null);
-		Set<RoleEntity> roles = user.getRoles();
-		if(roles == null) {
-			roles = new HashSet<RoleEntity>();
+		RoleDao roleDao = new RoleDaoImpl();
+		Set<RoleEntity> roles = new HashSet<RoleEntity>();
+		List<Role> rolesDto = userDto.getRoles();
+		for(Role role : rolesDto) {
+			RoleEntity roleEntity = roleDao.find(role.getId());
+			roles.add(roleEntity);
 		}
 		user.setRoles(roles);
 		return user;
@@ -37,7 +42,8 @@ public class UserMapper {
 	}
 	
 	public static User buildFromEntity(UserEntity user) {
-		User userDto = new User(user.getId(), user.getCreatedDate(), user.getLastModifiedDate(), user.getName(), user.getEmail(), user.getDescription(), null);
+		List<Role> roles = RoleMapper.buildFromEntities(user.getRoles());
+		User userDto = new User(user.getId(), user.getCreatedDate(), user.getLastModifiedDate(), user.getName(), user.getEmail(), user.getDescription(), roles);
 		return userDto;
 	}
 }

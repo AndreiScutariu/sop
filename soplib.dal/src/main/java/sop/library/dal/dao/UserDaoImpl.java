@@ -7,5 +7,5 @@ public class UserDaoImpl extends BaseDaoImpl<UserEntity> implements UserDao {
 	public UserDaoImpl() {
 		super(UserEntity.class);
 	}
-
+	
 }

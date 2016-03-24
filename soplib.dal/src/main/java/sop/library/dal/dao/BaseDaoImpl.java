@@ -14,8 +14,8 @@ import sop.library.exceptions.DataAccessLayerException;
 
 public abstract class BaseDaoImpl<T extends BaseEntity> implements BaseDao<T> {
 	
-	private Session session;
-    private Transaction tx;
+	protected Session session;
+	protected Transaction tx;
 
     private Class<T> genericType;
     

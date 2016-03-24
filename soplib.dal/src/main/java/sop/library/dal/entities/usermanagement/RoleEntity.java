@@ -23,10 +23,8 @@ public class RoleEntity implements BaseEntity {
 
 	private String name;
 
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
 	private Date createdDate;
 
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
 	private Date lastModifiedDate;
 
 	public Long getId() {

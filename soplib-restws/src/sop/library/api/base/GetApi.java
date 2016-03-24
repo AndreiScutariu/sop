@@ -35,7 +35,7 @@ public abstract class GetApi<T> {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 		return Response
-				.status(Status.FOUND)
+				.ok()
 				.entity(obj)
 				.build();
 	}

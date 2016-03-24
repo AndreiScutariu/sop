@@ -17,6 +17,8 @@ public class User extends BaseModel implements Serializable {
 	
 	private String description;
 	
+	private List<Role> roles;
+	
 	public User() {
 	}
 
@@ -27,6 +29,7 @@ public class User extends BaseModel implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.description = description;
+		this.roles = roles;
 	}
 	
 	public String getName() {
@@ -57,6 +60,14 @@ public class User extends BaseModel implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 }
