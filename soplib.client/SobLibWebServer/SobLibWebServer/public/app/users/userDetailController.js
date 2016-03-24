@@ -1,13 +1,16 @@
 ﻿(function (module) {
-	
+
 	var scopeModeBuilder = (function () {
 		var obj = {};
 		var scope;
 	    var userService;
+		var pubSub;
 
-		obj.init = function (initialScope, uService) {
-            scope = initialScope;
-		    userService = uService;
+		obj.init = function (scopeParam, userServiceParam, pubSubParam) {
+            scope = scopeParam;
+		    userService = userServiceParam;
+			pubSub = pubSubParam;
+
             scope.modalShown = false;
             scope.user = {};
 
@@ -21,7 +24,8 @@
 
             scope.saveUser = function () {
                 var callback = function(response) {
-                    console.log(response);
+					scope.modalShown = false;
+					pubSub.publish("newUserSaved", response.data);
                 };
                 userService.save(scope.user, callback);
 		    };
@@ -34,8 +38,8 @@
 		return obj;
 	})();
 
-	module.controller("userDetailController", ["$scope", "userService", "roleService", function ($scope, userService, roleService) {
-            scopeModeBuilder.init($scope, userService);
+	module.controller("userDetailController", ["$scope", "userService", "roleService", "pubSub", function ($scope, userService, roleService, pubSub) {
+            scopeModeBuilder.init($scope, userService, pubSub);
 	        roleService.getAll(scopeModeBuilder.buildRolesModel);
 	    }]);
 

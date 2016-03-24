@@ -1,5 +1,5 @@
 ﻿(function (module) {
-    
+
     module.service('userService', ["$http", "configurationService", function ($http, configurationService) {
             this.getAll = function (callback) {
                 $http.get(configurationService.usersEndpoint).then(callback);

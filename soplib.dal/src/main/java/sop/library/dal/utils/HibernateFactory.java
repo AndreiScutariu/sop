@@ -81,7 +81,7 @@ public class HibernateFactory {
 	private static SessionFactory configureSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         
-        File f = new File("D:\\Projects\\sop-library\\source\\soplib.dal\\src\\main\\java\\sop\\library\\dal\\utils\\hibernate.cfg.xml"); 
+        File f = new File("d:\\Projects\\SopLib\\sources\\sop\\soplib.dal\\src\\main\\java\\sop\\library\\dal\\utils\\hibernate.cfg.xml"); 
         configuration.configure(f);
         
         configuration.addAnnotatedClass(RoleEntity.class);
