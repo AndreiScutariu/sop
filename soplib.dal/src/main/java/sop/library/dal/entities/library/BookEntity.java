@@ -1,7 +1,9 @@
 package sop.library.dal.entities.library;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -37,10 +39,8 @@ public class BookEntity implements BaseEntity{
 	@OneToMany(mappedBy="book")
 	private Set<BookAuthorEntity> authors = new HashSet<BookAuthorEntity>(0);
 	
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
 	private Date createdDate;
 
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
 	private Date lastModifiedDate;
 	
 	public String getName() {
@@ -70,7 +70,6 @@ public class BookEntity implements BaseEntity{
 	public Set<BookAuthorEntity> getAuthors() {
 		return authors;
 	}
-
 	
 	public Long getId() {
 		return id;
@@ -106,5 +105,13 @@ public class BookEntity implements BaseEntity{
 
 	public void setLastModifiedDate(Date date) {
 		lastModifiedDate = date;
+	}
+
+	public List<UserEntity> getAuthorsList() {
+		List<UserEntity> users = new ArrayList<UserEntity>();
+		for(BookAuthorEntity e : getAuthors()) {
+			users.add(e.getAutor());
+		}
+		return users;
 	}
 }

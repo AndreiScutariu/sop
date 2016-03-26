@@ -21,14 +21,15 @@ public class BookAuthorEntity implements BaseEntity  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
 	private Date createdDate;
 
-	//@Type(type = "org.joda.time.contrib.hibernate.PersistentDate")
 	private Date lastModifiedDate;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	private UserEntity autor;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	private BookEntity book;
 	
 	public Long getId() {
 		return id;
@@ -45,9 +46,6 @@ public class BookAuthorEntity implements BaseEntity  {
 	public void setAutor(UserEntity autor) {
 		this.autor = autor;
 	}
-
-	@OneToOne(fetch = FetchType.EAGER)
-	private BookEntity book;
 	
 	public BookEntity getBook() {
 		return book;

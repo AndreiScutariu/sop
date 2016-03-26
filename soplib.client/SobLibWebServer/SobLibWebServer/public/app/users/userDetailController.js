@@ -44,14 +44,14 @@
 	        scope.roles = response.data;
 	    };
 
-		obj.whenUserDeleted = function (event, uri) {
+		obj.whenUserDeleted = function (event, user) {
 			var callback = function(response) {
 				pubSub.publish("refreshGrid");
 			};
-			userService.deleteUser(uri, callback);
+			userService.deleteUser(user, callback);
 		};
 
-		obj.whenUserEdit = function (event, uri) {
+		obj.whenUserEdit = function (event, user) {
 			scope.modalShown = true;
 			scope.labels = { frmTitle: "Update User", btnName: "Update" };
 			var callback = function(response) {
@@ -63,7 +63,7 @@
                 });
 				pubSub.publish("refreshGrid");
 			};
-			userService.getUser(uri, callback);
+			userService.getUser(user, callback);
 		};
 
 		return obj;

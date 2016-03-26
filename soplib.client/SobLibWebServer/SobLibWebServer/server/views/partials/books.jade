@@ -1,1 +1,24 @@
-﻿p Books {{bookTemp}}
+﻿h2 Books
+
+
+br
+div(ng-controller="bookDetailController")
+    button(type="button" class="btn btn-sm"  ng-click="addNewBook()") Add new book
+    modal-dialog(show='modalShown' width='480px' height='80%')
+        form.form-horizontal
+            fieldset
+                legend {{labels.frmTitle}}
+                    div.form-group
+                        br
+                        label(for="name").col-lg-3.control-label Book Name
+                        div.col-lg-8
+                            input.form-control(type="text" id="name" placeholder="Book Name" ng-model="book.name")
+                    div.form-group
+                        label(for="desc").col-lg-3.control-label Description
+                        div.col-lg-8
+                            input.form-control(type="text" id="desc" placeholder="Description" ng-model="book.description")
+
+                    div.form-group
+                        div.col-lg-9
+                        div.col-lg-3
+                            button.btn.btn-primary.btn-sm(ng-click="saveBook()") {{labels.btnName}}

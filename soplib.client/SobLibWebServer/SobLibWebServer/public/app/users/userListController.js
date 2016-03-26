@@ -14,13 +14,11 @@
 			userService = userServiceParam;
 
 			scope.editUser = function(user) {
-				var uri = filter('filter')(user.links, {desc: "self"})[0];
-				pubSub.publish("editUserEvent", uri);
+				pubSub.publish("editUserEvent", user);
 			};
 
 			scope.deleteUser = function(user) {
-				var uri = filter('filter')(user.links, {desc: "self"})[0];
-				pubSub.publish("deleteUserEvent", uri);
+				pubSub.publish("deleteUserEvent", user);
 			};
         };
 

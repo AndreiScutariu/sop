@@ -1,5 +1,6 @@
 package sop.library.model.mapper;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,9 +14,9 @@ import sop.library.dal.entities.usermanagement.RoleEntity;
 import sop.library.dal.entities.usermanagement.UserEntity;
 import sop.library.exceptions.ResourceNotFoundException;
 
-public class UserMapper {
+public class UserMapper implements Mapper<User, UserEntity> {
 
-	public static UserEntity buildFromDto(User userDto) {
+	public UserEntity toEntity(User userDto) {
 		UserEntity user = new UserEntity(userDto.getId(), userDto.getName(), userDto.getEmail(),
 				userDto.getDescription(), null);
 		RoleDao roleDao = new RoleDaoImpl();
@@ -28,8 +29,34 @@ public class UserMapper {
 		user.setRoles(roles);
 		return user;
 	}
+	
+	public User toModel(UserEntity user) {
+		RoleMapper roleMapper = new RoleMapper();
+		List<Role> roles = roleMapper.toEntityList(user.getRoles());
+		User userDto = new User(user.getId(), user.getCreatedDate(), user.getLastModifiedDate(), user.getName(),
+				user.getEmail(), user.getDescription(), roles);
+		return userDto;
+	}
 
-	public static UserEntity mapUser(Long id, User userDto) throws ResourceNotFoundException {
+	@Override
+	public List<User> toModelList(List<UserEntity> entities) {
+		List<User> users = new ArrayList<User>();
+		for(UserEntity user : entities) {
+			users.add(toModel(user));
+		}
+		return users;
+	}
+	
+	public List<User> toModelList(Set<UserEntity> entities) {
+		return null;
+	}
+
+	@Override
+	public List<UserEntity> toEntityList(List<User> dtos) {
+		return null;
+	}
+	
+	public UserEntity mapUser(Long id, User userDto) throws ResourceNotFoundException {
 		UserDao userDao = new UserDaoImpl();
 		UserEntity user = userDao.find(id);
 		if (user == null) {
@@ -39,12 +66,5 @@ public class UserMapper {
 		user.setDescription(userDto.getDescription());
 
 		return user;
-	}
-
-	public static User buildFromEntity(UserEntity user) {
-		List<Role> roles = RoleMapper.buildFromEntities(user.getRoles());
-		User userDto = new User(user.getId(), user.getCreatedDate(), user.getLastModifiedDate(), user.getName(),
-				user.getEmail(), user.getDescription(), roles);
-		return userDto;
 	}
 }

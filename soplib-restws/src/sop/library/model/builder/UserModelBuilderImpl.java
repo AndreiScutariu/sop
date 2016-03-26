@@ -1,6 +1,5 @@
 package sop.library.model.builder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import sop.library.dal.dao.UserDao;
@@ -14,12 +13,12 @@ import sop.library.model.mapper.UserMapper;
 
 public class UserModelBuilderImpl implements UserModelBuilder {
 	
+	UserMapper userMapper = new UserMapper();
+	RoleMapper roleMapper = new RoleMapper();
+	
 	public List<User> get() {
-		List<User> users = new ArrayList<User>();
 		UserDao userDao = new UserDaoImpl();
-		for(UserEntity user : userDao.findAll()) {
-			users.add(UserMapper.buildFromEntity(user));
-		}
+		List<User> users = userMapper.toModelList(userDao.findAll());
 		return users;
 	}
 	
@@ -28,13 +27,13 @@ public class UserModelBuilderImpl implements UserModelBuilder {
 		UserEntity user = userDao.find(id);
 		if(user == null)
 			throw new ResourceNotFoundException();
-		User userDto = UserMapper.buildFromEntity(user);
+		User userDto = userMapper.toModel(user);
 		return userDto;
 	}
 	
 	public Long save(User userDto) {
 		UserDao userDao = new UserDaoImpl();
-		UserEntity user = UserMapper.buildFromDto(userDto);
+		UserEntity user = userMapper.toEntity(userDto);
 		userDao.saveOrUpdate(user);
 		Long savedUserId = user.getId();
 		return savedUserId;
@@ -42,7 +41,7 @@ public class UserModelBuilderImpl implements UserModelBuilder {
 	
 	public void update(Long id, User userDto) throws ResourceNotFoundException {
 		UserDao userDao = new UserDaoImpl();
-		UserEntity user = UserMapper.mapUser(id, userDto);
+		UserEntity user = userMapper.mapUser(id, userDto);
 		userDao.saveOrUpdate(user);
 	}
 	
@@ -59,7 +58,7 @@ public class UserModelBuilderImpl implements UserModelBuilder {
 		UserEntity user = userDao.find(idL);
 		if(user == null)
 			throw new ResourceNotFoundException();
-		List<Role> roles = RoleMapper.buildFromEntities(user.getRoles());
+		List<Role> roles = roleMapper.toEntityList(user.getRoles());
 		return roles;
 	}
 }

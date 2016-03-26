@@ -12,11 +12,13 @@ import sop.library.model.mapper.RoleMapper;
 
 public class RoleModelBuilderImpl implements BaseModelBuilder<Role> {
 	
+	RoleMapper RoleMapper = new RoleMapper();
+	
 	public List<Role> get(){
 		List<Role> roles = new ArrayList<Role>();
 		RoleDao roleDao = new RoleDaoImpl();
 		for(RoleEntity role : roleDao.findAll()) {
-			roles.add(RoleMapper.buildFromEntity(role));
+			roles.add(RoleMapper.toModel(role));
 		}
 		return roles;
 	}
@@ -26,7 +28,7 @@ public class RoleModelBuilderImpl implements BaseModelBuilder<Role> {
 		RoleEntity role = roleDao.find(id);
 		if(role == null)
 			throw new ResourceNotFoundException();
-		return RoleMapper.buildFromEntity(role);
+		return RoleMapper.toModel(role);
 	}
 
 	public Long save(Role userDto) {
