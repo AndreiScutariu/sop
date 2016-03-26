@@ -20,7 +20,7 @@ table.table.table-striped.table-hover
 br
 div(ng-controller="userDetailController")
     button(type="button" class="btn btn-sm"  ng-click="addNewUser()") Add new user
-    modal-dialog(show='modalShown' width='480px' height='80%')
+    modal-dialog(show='modalShown' width='400px' height='80%')
         form.form-horizontal
             fieldset
                 legend {{labels.frmTitle}}
@@ -45,6 +45,6 @@ div(ng-controller="userDetailController")
                                 label.role-label(for="{{role.name}}") {{role.name}}
 
                     div.form-group
-                        div.col-lg-9
                         div.col-lg-3
+                        div.col-lg-9
                             button.btn.btn-primary.btn-sm(ng-click="saveUser()") {{labels.btnName}}

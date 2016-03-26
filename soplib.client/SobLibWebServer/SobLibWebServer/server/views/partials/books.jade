@@ -17,8 +17,17 @@ div(ng-controller="bookDetailController")
                         label(for="desc").col-lg-3.control-label Description
                         div.col-lg-8
                             input.form-control(type="text" id="desc" placeholder="Description" ng-model="book.description")
+                    div.form-group
+                        div.col-lg-3
+                        div.col-lg-9
+                            h3 Authors
+                        div.col-lg-3
+                        div.col-lg-9
+                            h4 You
+                            a
+                                h4.pointer Add more authors
 
                     div.form-group
-                        div.col-lg-9
                         div.col-lg-3
+                        div.col-lg-9
                             button.btn.btn-primary.btn-sm(ng-click="saveBook()") {{labels.btnName}}

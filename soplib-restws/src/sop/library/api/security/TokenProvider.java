@@ -3,12 +3,12 @@ package sop.library.api.security;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import sop.library.dal.dao.UserDao;
 import sop.library.dal.dao.UserDaoImpl;
@@ -25,21 +25,19 @@ public class TokenProvider {
 	public TokenProvider() {
 	}
 	
-	@GET
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public String get() {
-		return "ceva";
-	}
-	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response generateToken(TokenRequest tokenRequest) {
 		
+		//TODO Refactor, move this to model builders :)
 		UserDao userDao = new UserDaoImpl();
 		UserTokenDao tokenDao = new UserTokenDaoImpl();
 		
-		UserEntity userEntity = userDao.getByEmail(tokenRequest.getEmail());
+		UserEntity userEntity = userDao.getByEmail(tokenRequest.getEmail());		
+		if(userEntity == null)
+			return Response.status(Status.NOT_FOUND).build();
+			
 		UserToken token = new UserToken();
 		token.setUser(userEntity);
 		
