@@ -2,6 +2,7 @@ package sop.library.api.security;
 
 import java.util.UUID;
 
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -20,39 +21,40 @@ import sop.library.model.TokenRequest;
 import sop.library.model.TokenResponse;
 
 @Path("generatetoken")
-public class TokenProvider {
-	
-	public TokenProvider() {
+public class TokenProviderApi {
+
+	public TokenProviderApi() {
 	}
-	
+
 	@POST
-	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@PermitAll
 	public Response generateToken(TokenRequest tokenRequest) {
-		
-		//TODO Refactor, move this to model builders :)
+
+		// TODO Refactor, move this to model builders :)
 		UserDao userDao = new UserDaoImpl();
 		UserTokenDao tokenDao = new UserTokenDaoImpl();
-		
-		UserEntity userEntity = userDao.getByEmail(tokenRequest.getEmail());		
-		if(userEntity == null)
+
+		UserEntity userEntity = userDao.getByEmail(tokenRequest.getEmail());
+		if (userEntity == null)
 			return Response.status(Status.NOT_FOUND).build();
 		UserToken token = new UserToken();
 		token.setUser(userEntity);
-		
+
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(UUID.randomUUID().toString().replace("-", ""));
 		stringBuilder.append(UUID.randomUUID().toString().replace("-", ""));
 		stringBuilder.append(UUID.randomUUID().toString().replace("-", ""));
 		token.setToken(stringBuilder.toString());
-		
+
 		Long id = tokenDao.saveOrUpdate(token);
 		token = tokenDao.find(id);
-		
+
 		TokenResponse response = new TokenResponse();
 		response.setToken(token.getToken());
 		response.setExpireAt(token.getExpireAt());
-		
+
 		return Response.ok().entity(response).build();
 	}
 }

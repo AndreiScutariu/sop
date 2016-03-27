@@ -1,18 +1,18 @@
 package sop.library.api.security;
 
 import java.io.IOException;
-
 import java.lang.reflect.Method;
-import java.util.List;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MultivaluedMap;
-//import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
+
+import sop.library.api.security.utils.AuthHeaderToken;
+import sop.library.exceptions.AuthTokenNotPresentException;
 
 @Provider
 public class AuthenticationFilter implements
@@ -21,33 +21,26 @@ public class AuthenticationFilter implements
 	@Context
 	private ResourceInfo resourceInfo;
 
-	private static final String AUTHORIZATION_PROPERTY = "Authorization";
-	private static final String AUTHENTICATION_SCHEME = "Basic";
-
-//	private static final Response ACCESS_DENIED = Response
-//			.status(Response.Status.UNAUTHORIZED)
-//			.entity("You cannot access this resource.").build();
+	private static final Response ACCESS_DENIED = Response
+			.status(Response.Status.UNAUTHORIZED)
+			.entity("You cannot access this resource. Please provide a valid token.").build();
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-
+		
 		Method method = resourceInfo.getResourceMethod();
-
 		if (!method.isAnnotationPresent(PermitAll.class)) {
-			final MultivaluedMap<String, String> headers = requestContext.getHeaders();
-			final List<String> authorization = headers.get(AUTHORIZATION_PROPERTY);
-			if (authorization == null || authorization.isEmpty()) {
-				//requestContext.abortWith(ACCESS_DENIED);
-				return;
+			String content = null;
+			
+			try {
+				content = AuthHeaderToken.getToken(requestContext.getHeaders());
+			} catch (AuthTokenNotPresentException e) {
+				requestContext.abortWith(ACCESS_DENIED);
 			}
 			
-			String content = authorization.get(0);
-			content = content.replace(AUTHENTICATION_SCHEME, "");
-			
-			if(method.isAnnotationPresent(RolesAllowed.class)) {
-				
+			if (method.isAnnotationPresent(RolesAllowed.class)) {
+				System.out.println("Filter Token: " + content);
 			}
 		}
-	}	
-
+	}
 }

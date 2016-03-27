@@ -37,8 +37,5 @@ public class Books extends GetApi<Book> {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/publish")
 	public void publish(Book book, @HeaderParam("Authorization") String userToken) {
-		userToken = userToken.replace("Basic", "");
-		System.out.println("Token: " + userToken);
 	}
-
 }
