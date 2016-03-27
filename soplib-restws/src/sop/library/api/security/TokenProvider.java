@@ -37,7 +37,6 @@ public class TokenProvider {
 		UserEntity userEntity = userDao.getByEmail(tokenRequest.getEmail());		
 		if(userEntity == null)
 			return Response.status(Status.NOT_FOUND).build();
-			
 		UserToken token = new UserToken();
 		token.setUser(userEntity);
 		

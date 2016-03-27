@@ -11,7 +11,7 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
+//import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 @Provider
@@ -24,9 +24,9 @@ public class AuthenticationFilter implements
 	private static final String AUTHORIZATION_PROPERTY = "Authorization";
 	private static final String AUTHENTICATION_SCHEME = "Basic";
 
-	private static final Response ACCESS_DENIED = Response
-			.status(Response.Status.UNAUTHORIZED)
-			.entity("You cannot access this resource.").build();
+//	private static final Response ACCESS_DENIED = Response
+//			.status(Response.Status.UNAUTHORIZED)
+//			.entity("You cannot access this resource.").build();
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -43,7 +43,6 @@ public class AuthenticationFilter implements
 			
 			String content = authorization.get(0);
 			content = content.replace(AUTHENTICATION_SCHEME, "");
-			System.out.println(content);
 			
 			if(method.isAnnotationPresent(RolesAllowed.class)) {
 				
