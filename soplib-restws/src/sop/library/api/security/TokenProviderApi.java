@@ -21,6 +21,7 @@ import sop.library.model.TokenRequest;
 import sop.library.model.TokenResponse;
 
 @Path("generatetoken")
+@PermitAll
 public class TokenProviderApi {
 
 	public TokenProviderApi() {

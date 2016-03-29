@@ -1,0 +1,11 @@
+h2 Generate Token
+
+br
+div
+    form.form-horizontal
+        fieldset
+            div.form-group
+                div.col-lg-10
+                    input.form-control(type="text" id="email" placeholder="Enter your email" ng-model="request.email")
+                div.col-lg-2
+                    button.btn.btn-primary.btn-sm.witdh165(ng-click="generateToken()") Generate Token

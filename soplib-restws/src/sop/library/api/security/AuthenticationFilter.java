@@ -2,6 +2,9 @@ package sop.library.api.security;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -11,7 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
-import sop.library.api.security.utils.AuthHeaderToken;
+import sop.library.api.security.utils.HeaderFieldsHelper;
 import sop.library.exceptions.AuthTokenNotPresentException;
 
 @Provider
@@ -30,16 +33,20 @@ public class AuthenticationFilter implements
 		
 		Method method = resourceInfo.getResourceMethod();
 		if (!method.isAnnotationPresent(PermitAll.class)) {
-			String content = null;
+			String authToken = null;
 			
 			try {
-				content = AuthHeaderToken.getToken(requestContext.getHeaders());
+				authToken = HeaderFieldsHelper.getToken(requestContext);
 			} catch (AuthTokenNotPresentException e) {
 				requestContext.abortWith(ACCESS_DENIED);
 			}
 			
 			if (method.isAnnotationPresent(RolesAllowed.class)) {
-				System.out.println("Filter Token: " + content);
+				RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
+                Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
+                for(String s : rolesSet) {
+                	System.out.println(s);
+                }
 			}
 		}
 	}

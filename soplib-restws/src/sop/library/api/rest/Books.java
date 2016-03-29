@@ -1,5 +1,6 @@
 package sop.library.api.rest;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -8,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import sop.library.api.base.GetApi;
+import sop.library.api.security.utils.HeaderFieldsHelper;
 import sop.library.model.Book;
 import sop.library.model.builder.BookModelBuilder;
 import sop.library.model.builder.BookModelBuilderImpl;
@@ -36,6 +38,9 @@ public class Books extends GetApi<Book> {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/publish")
-	public void publish(Book book, @HeaderParam("Authorization") String userToken) {
+	@RolesAllowed("author")
+	public void publish(Book book, @HeaderParam("Authorization") String token) {
+		token = HeaderFieldsHelper.getToken(token);
+		System.out.println(token);
 	}
 }

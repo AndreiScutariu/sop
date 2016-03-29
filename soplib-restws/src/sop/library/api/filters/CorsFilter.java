@@ -17,7 +17,6 @@ public class CorsFilter implements ContainerResponseFilter {
     
     @Override
     public void filter( ContainerRequestContext requestCtx, ContainerResponseContext responseCtx ) throws IOException {
-    	System.out.println("*** filter triggered");
         responseCtx.getHeaders().add( "Access-Control-Allow-Origin", "*" );
         responseCtx.getHeaders().add( "Access-Control-Allow-Credentials", "true" );
         responseCtx.getHeaders().add( "Access-Control-Allow-Methods", "GET, POST, DELETE, PUT" );

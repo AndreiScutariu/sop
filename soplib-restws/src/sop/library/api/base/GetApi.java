@@ -2,6 +2,7 @@ package sop.library.api.base;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +19,7 @@ public abstract class GetApi<T> {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@PermitAll //TODO Here
 	public List<T> getAll() {
 		List<T> list = modelBuilder.get();
 		return list;
@@ -26,6 +28,7 @@ public abstract class GetApi<T> {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("{id}")
+	@PermitAll //TODO Here
 	public Response get(@PathParam("id") String id) {
 		Long idL = Long.decode(id);
 		T obj;

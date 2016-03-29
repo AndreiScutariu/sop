@@ -10,6 +10,7 @@
 		.when("/roles", { templateUrl: "partials/roles", controller: "roleController" })
 		.when("/users", { templateUrl: "partials/users", controller: "userListController" })
 		.when("/books", { templateUrl: "partials/books", controller: "bookListController" })
+		.when("/generatetoken", { templateUrl: "partials/generatetoken", controller: "generateTokenController" })
 		.otherwise({ redirectTo: '/' });
 	});
 
