@@ -1,9 +1,5 @@
 (function (module, $) {
 
-	var callback = function(response) {
-		console.log(response);
-	};
-
 	module.controller("bookDetailController", ["$scope", "$filter", "bookService", "pubSub", function ($scope, $filter, bookService, pubSub) {
 			$scope.book = {};
 			$scope.modalShown = false;
@@ -13,8 +9,13 @@
 				$scope.modalShown = true;
 			};
 
+			var callback = function(response) {
+				$scope.modalShown = false;
+				pubSub.publish("refreshBooksGrid");
+			};
+
 			$scope.saveBook = function() {
-				bookService.publish($scope.book);
+				bookService.publish($scope.book, callback);
 			};
 		}]);
 

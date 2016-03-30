@@ -1,4 +1,21 @@
 h2 Books
+table.table.table-striped.table-hover
+    thead
+        tr
+            th.col-lg-3 Name
+            th.col-lg-3 Description
+            th.col-lg-3 Author
+            th.col-lg-1
+            th.col-lg-1
+    tbody
+        tr(ng-repeat="book in books")
+            td.col-lg-3 {{book.name}}
+            td.col-lg-3 {{book.description}}
+            td.col-lg-3 {{book.authors[0].name}}
+            td.col-lg-1
+                a.pointer Edit
+            td.col-lg-1
+                a.pointer(ng-click="delete(book)") Delete
 
 br
 div(ng-controller="bookDetailController")

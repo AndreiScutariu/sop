@@ -28,6 +28,8 @@ public class UserEntity implements BaseEntity {
 	
 	private String name;
 	
+	private String password;
+	
 	private String description;
 	
 	private String email;
@@ -43,13 +45,14 @@ public class UserEntity implements BaseEntity {
 	)
 	private Set<RoleEntity> roles = new HashSet<RoleEntity>(0);
 	
-	public UserEntity(Long id, String name, String email, String description, Set<RoleEntity> roles) {
+	public UserEntity(Long id, String name, String email, String description, String password, Set<RoleEntity> roles) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.description = description;
 		this.roles = roles;
+		this.password = password;
 	}
 	
 	public Long getId() {
@@ -106,5 +109,13 @@ public class UserEntity implements BaseEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

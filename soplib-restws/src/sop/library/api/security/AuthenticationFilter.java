@@ -11,11 +11,11 @@ import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import sop.library.api.security.utils.HeaderFieldsHelper;
 import sop.library.exceptions.AuthTokenNotPresentException;
+import sop.library.utils.Console;
 
 @Provider
 public class AuthenticationFilter implements
@@ -24,9 +24,11 @@ public class AuthenticationFilter implements
 	@Context
 	private ResourceInfo resourceInfo;
 
-	private static final Response ACCESS_DENIED = Response
-			.status(Response.Status.UNAUTHORIZED)
-			.entity("You cannot access this resource. Please provide a valid token.").build();
+//	private static final Response ACCESS_DENIED = Response
+//			.status(Response.Status.UNAUTHORIZED)
+//			.entity("You cannot access this resource. Please provide a valid token.")
+//			//.header("Access-Control-Allow-Origin", "*")
+//			.build();
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -38,8 +40,11 @@ public class AuthenticationFilter implements
 			try {
 				authToken = HeaderFieldsHelper.getToken(requestContext);
 			} catch (AuthTokenNotPresentException e) {
-				requestContext.abortWith(ACCESS_DENIED);
+				//requestContext.abortWith(ACCESS_DENIED);
 			}
+			//TODO Test expired tokens
+			
+			Console.log("Token: " + authToken);
 			
 			if (method.isAnnotationPresent(RolesAllowed.class)) {
 				RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);

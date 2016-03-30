@@ -36,6 +36,8 @@ public abstract class GetApi<T> {
 			obj = modelBuilder.get(idL);
 		} catch (ResourceNotFoundException e) {
 			return Response.status(Status.NOT_FOUND).build();
+		} catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).entity("Error on server. :(").build();
 		}
 		return Response
 				.ok()

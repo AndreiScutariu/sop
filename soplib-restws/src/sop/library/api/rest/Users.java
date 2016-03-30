@@ -2,6 +2,7 @@ package sop.library.api.rest;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
@@ -21,6 +22,7 @@ import sop.library.model.builder.UserModelBuilder;
 import sop.library.model.builder.UserModelBuilderImpl;
 
 @Path("users")
+@PermitAll
 public class Users extends GetApi<User>{
 
 	UserModelBuilder userModelBuilder;
@@ -33,6 +35,7 @@ public class Users extends GetApi<User>{
 	@POST	
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@PermitAll
 	public Response create(User user) {
 		Long id = modelBuilder.save(user);
 		User savedUser = null;
@@ -48,6 +51,7 @@ public class Users extends GetApi<User>{
 	@Path("{id}")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@PermitAll
 	public Response update(@PathParam ("id") String id, User user) {
 		Long idL = Long.decode(id);
 		User updatedUser = null;
@@ -63,6 +67,7 @@ public class Users extends GetApi<User>{
 	@DELETE
 	@Path("{id}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@PermitAll
 	public Response delete(@PathParam ("id") String id) {
 		Long idL = Long.decode(id);
 		try {
@@ -76,6 +81,7 @@ public class Users extends GetApi<User>{
 	@DELETE
 	@Path("{id}/roles")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@PermitAll
 	public Response getRoles(@PathParam ("id") String id) {
 		Long idL = Long.decode(id);
 		List<Role> roles = null;

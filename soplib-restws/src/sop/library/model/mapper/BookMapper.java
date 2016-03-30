@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sop.library.dal.entities.library.BookEntity;
+import sop.library.dal.entities.library.BookStatusEntity;
 import sop.library.model.Book;
 
 public class BookMapper implements Mapper<Book, BookEntity> {
@@ -24,13 +25,21 @@ public class BookMapper implements Mapper<Book, BookEntity> {
 		for (BookEntity b : entities) {
 			list.add(toModel(b));
 		}
-		return null;
+		return list;
 	}
 
 	@Override
 	public BookEntity toEntity(Book dto) {
-		// TODO Auto-generated method stub
-		return null;
+		BookEntity book = new BookEntity();
+		
+		book.setDescription(dto.getDescription());
+		book.setName(dto.getName());
+		
+		BookStatusEntity status = new BookStatusEntity();
+		status.setId(2L);
+		book.setStatus(status);
+		
+		return book;
 	}
 
 	@Override

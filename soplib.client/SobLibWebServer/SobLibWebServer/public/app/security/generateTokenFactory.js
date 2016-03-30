@@ -4,7 +4,6 @@
             var obj = {};
 
             function successCallback(response) {
-                console.log(response);
                 sessionStorage.token = response.data.token;
             };
 
@@ -25,6 +24,7 @@
             };
 
             obj.getToken = function() {
+                console.log("Current token: " + sessionStorage.token);
                 return sessionStorage.token;
             };
 

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class BookEntity implements BaseEntity{
 	@OneToOne(fetch = FetchType.EAGER)
 	private UserEntity editor;
 	
-	@OneToMany(mappedBy="book")
+	@OneToMany(mappedBy="book", fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	private Set<BookAuthorEntity> authors = new HashSet<BookAuthorEntity>(0);
 	
 	private Date createdDate;

@@ -7,5 +7,8 @@ import sop.library.model.Role;
 import sop.library.model.User;
 
 public interface UserModelBuilder extends BaseModelBuilder<User> {
+	
 	List<Role> getUserRoles(Long idL) throws ResourceNotFoundException;
+
+	User getByToken(String token) throws ResourceNotFoundException;
 }

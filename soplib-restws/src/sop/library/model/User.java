@@ -13,6 +13,8 @@ public class User extends BaseModel implements Serializable {
 
 	private String name;
 
+	private String password;
+	
 	private String email;
 	
 	private String description;
@@ -22,7 +24,7 @@ public class User extends BaseModel implements Serializable {
 	public User() {
 	}
 
-	public User(Long id, Date created, Date modified, String name, String email, String description, List<Role> roles) {
+	public User(Long id, Date created, Date modified, String name, String email, String description, String password, List<Role> roles) {
 		super(id, created, modified);
 		resourceRoot = "users";
 		buildLinks();
@@ -30,6 +32,7 @@ public class User extends BaseModel implements Serializable {
 		this.email = email;
 		this.description = description;
 		this.roles = roles;
+		this.password = password;
 	}
 	
 	public String getName() {
@@ -68,6 +71,14 @@ public class User extends BaseModel implements Serializable {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

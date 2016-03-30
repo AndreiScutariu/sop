@@ -34,6 +34,10 @@ div(ng-controller="userDetailController")
                         div.col-lg-8
                             input.form-control(type="text" id="email" placeholder="Email" ng-model="user.email")
                     div.form-group
+                        label(for="password").col-lg-3.control-label Password
+                        div.col-lg-8
+                            input.form-control(type="password" id="password" placeholder="Password" ng-model="user.password")
+                    div.form-group
                         label(for="desc").col-lg-3.control-label Small Description
                         div.col-lg-8
                             input.form-control(type="text" id="desc" placeholder="Small Description" ng-model="user.description")

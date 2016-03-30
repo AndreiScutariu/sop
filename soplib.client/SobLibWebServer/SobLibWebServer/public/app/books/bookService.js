@@ -20,7 +20,6 @@
                      },
                     data: book
                 };
-                console.log(config);
                 $http(config).then(callback, errorCallback);
             };
 
